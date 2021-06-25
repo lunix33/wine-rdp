@@ -32,14 +32,12 @@ apt-add-repository "deb http://dl.winehq.org/wine-builds/debian/ buster main"
 # Update and install required packages.
 echo "===== Installing running packages ===="
 apt update
-apt install -y \
+apt install -y --install-recommends \
   supervisor \
   openbox \
-  wine-stable=6.0.1~buster-1 \
+  winehq-stable=6.0.1~buster-1 \
   pulseaudio \
   pavucontrol \
-  winetricks \
-  zenity \
   htop \
   vim \
   xrdp \
@@ -49,13 +47,14 @@ apt install -y \
 cd /opt/wine-stable/share/wine
 echo "==== Installing Wine mono ===="
 mkdir mono
-wget -O - https://dl.winehq.org/wine/wine-mono/6.0.0/wine-mono-6.0.0-x86.tar.xz | tar Jxf - -C mono
+
+wget -P ./mono https://dl.winehq.org/wine/wine-mono/5.1.1/wine-mono-5.1.1-x86.msi
 
 # Install wine-gecko
 echo "==== Installing Wine gecko ===="
 mkdir gecko
-wget -O - http://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86.tar.xz | tar Jxf - -C gecko
-wget -O - http://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86_64.tar.xz | tar Jxf - -C gecko
+wget -P ./gecko http://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86.msi
+wget -P ./gecko http://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86_64.msi
 
 # Configure XRDP
 echo "==== Setting up XRDP ===="
